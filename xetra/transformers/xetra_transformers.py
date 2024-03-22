@@ -1,5 +1,5 @@
 from typing import NamedTuple
-
+import logging 
 from xetra.common.s3 import S3BucketConnector
 
 
@@ -51,6 +51,7 @@ class XetraETL():
     '''
     reads the Xetra data, transforms and writes tranformed to target '''
     def __init__(self, s3_bucket_src: S3BucketConnector, s3_bucket_trg:S3BucketConnector, meta_key:str ,src_args: XetraSourceConfig, trg_args: XetraTargetConfig) -> None:
+        self._logger = logging.getLogger(__name__)
         self.s3_bucket_src = s3_bucket_src
         self.s3_bucket_trg= s3_bucket_trg
         self.meta_key = meta_key
